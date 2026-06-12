@@ -1,0 +1,41 @@
+{
+  "name": "citation-checker",
+  "version": "2.15.0",
+  "description": "Portable agent skill for auditing legal citation footnotes in Word documents.",
+  "author": {
+    "name": "Citation Checker Skill Maintainers",
+    "url": "https://github.com/abrynild90"
+  },
+  "homepage": "https://github.com/abrynild90/citation-checker-skill#citation-checker-skill",
+  "repository": "https://github.com/abrynild90/citation-checker-skill",
+  "license": "MIT",
+  "keywords": [
+    "agent-skills",
+    "bluebook",
+    "citation-checker",
+    "codex",
+    "docx",
+    "legal-citations"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Citation Checker",
+    "shortDescription": "Audit legal citations in Word footnotes",
+    "longDescription": "Audit Word .docx footnotes for legal citation formatting, Id. and supra issues, source verification candidates, and approved tracked-change corrections.",
+    "developerName": "Citation Checker Skill Maintainers",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Code"
+    ],
+    "websiteURL": "https://github.com/abrynild90/citation-checker-skill",
+    "privacyPolicyURL": "https://github.com/abrynild90/citation-checker-skill/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/abrynild90/citation-checker-skill/blob/main/LICENSE",
+    "defaultPrompt": [
+      "Audit this Word article's footnote citations.",
+      "Check supra and Id. usage in this .docx."
+    ],
+    "brandColor": "#2563EB"
+  }
+}

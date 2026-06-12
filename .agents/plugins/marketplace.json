@@ -1,0 +1,20 @@
+{
+  "name": "citation-checker-marketplace",
+  "interface": {
+    "displayName": "Citation Checker"
+  },
+  "plugins": [
+    {
+      "name": "citation-checker",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

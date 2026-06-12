@@ -1,0 +1,50 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install build tooling
+        run: python -m pip install --upgrade pip build twine
+      - name: Build wheel and sdist
+        run: python -m build
+      - name: Check distribution metadata
+        run: python -m twine check dist/*
+      - name: Install package from wheel
+        run: python -m pip install dist/*.whl
+      - name: Check installed dependencies
+        run: python -m pip check
+      - name: Check agent skill compatibility
+        run: python scripts/package_agent_skill.py --check
+      - name: Package agent skill zip
+        run: python scripts/package_agent_skill.py --output /tmp/citation-checker-agent-skill.zip --layout folder --profile raw
+      - name: Package root-layout agent skill zip
+        run: python scripts/package_agent_skill.py --output /tmp/citation-checker-agent-skill-root.zip --layout root --profile raw
+      - name: Package Codex plugin zip
+        run: python scripts/package_agent_skill.py --output /tmp/citation-checker-codex-plugin.zip --layout folder --profile plugin
+      - name: Installed CLI smoke test from wheel
+        run: python tests/installed_cli_smoke.py
+      - name: Compile Python files
+        run: python -m py_compile scripts/*.py scripts/core/*.py
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+      - name: Reinstall package from sdist
+        run: python -m pip install --force-reinstall dist/*.tar.gz
+      - name: Check sdist install
+        run: python -m pip check
+      - name: Installed CLI smoke test from sdist
+        run: python tests/installed_cli_smoke.py
+      - name: Check installed CLI
+        run: citation-checker --help
