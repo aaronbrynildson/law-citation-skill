@@ -23,7 +23,7 @@ There are three install modes:
 For repository-scoped Codex discovery, clone or copy this entire folder to:
 
 ```bash
-.agents/skills/citation-checker
+.agents/skills/law-citation-skill
 ```
 
 For user-scoped installs, use the skill directory documented by your Codex
@@ -36,7 +36,7 @@ OpenAI/Codex skill installation uses the full folder, including `SKILL.md`,
 ### OpenAI/Codex Plugin
 
 This repository is also plugin-ready. It includes `.codex-plugin/plugin.json`
-and a wrapper skill under `skills/citation-checker/` so Codex can package it as
+and a wrapper skill under `skills/law-citation-skill/` so Codex can package it as
 an installable plugin. It also includes a repo-scoped marketplace at
 `.agents/plugins/marketplace.json`, pointing at this plugin root with
 `source.path: "./"`. Validate the plugin wrapper before publishing:
@@ -48,7 +48,7 @@ python3 /path/to/plugin-creator/scripts/validate_plugin.py .
 Users can add the public GitHub marketplace directly, for example:
 
 ```bash
-codex plugin marketplace add abrynild90/citation-checker-skill
+codex plugin marketplace add aaronbrynildson/law-citation-skill
 ```
 
 Codex plugins are the recommended installable distribution unit for reusable
@@ -56,7 +56,7 @@ skills. Build the plugin artifact separately from raw skill uploads:
 
 ```bash
 python3 scripts/package_agent_skill.py \
-  --output citation-checker-codex-plugin.zip \
+  --output law-citation-skill-codex-plugin.zip \
   --layout folder \
   --profile plugin
 ```
@@ -64,7 +64,7 @@ python3 scripts/package_agent_skill.py \
 If you publish under a different repository name, update this command, the
 plugin metadata, and the `project.urls` values in `pyproject.toml`.
 
-Do not copy only `skills/citation-checker/` as a standalone skill. That
+Do not copy only `skills/law-citation-skill/` as a standalone skill. That
 directory is a plugin wrapper that intentionally points back to the repository
 root for `SKILL.md`, `scripts/`, and `references/`.
 
@@ -76,7 +76,7 @@ you are using:
 ```bash
 python3 scripts/package_agent_skill.py --check
 python3 scripts/package_agent_skill.py \
-  --output citation-checker-agent-skill.zip \
+  --output law-citation-skill-agent-skill.zip \
   --layout folder \
   --profile raw
 ```
@@ -99,7 +99,7 @@ source .venv/bin/activate
 python3 -m pip install .
 ```
 
-`pip install .` installs the `citation-checker` CLI and Python modules only. It
+`pip install .` installs the `law-citation-skill` CLI and Python modules only. It
 does not install the repository as an auto-discovered agent skill; use the
 folder copy/clone or zip packaging step above for that.
 
@@ -107,8 +107,8 @@ folder copy/clone or zip packaging step above for that.
 
 | Product surface | Status | Notes |
 |---|---|---|
-| OpenAI Codex CLI/IDE/app raw skill | Supported | Use `.agents/skills/citation-checker` or the user skill path documented by your Codex surface; package with `--profile raw`. |
-| OpenAI Codex plugin | Supported | `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json`, and `skills/citation-checker/` are included; package with `--profile plugin`. |
+| OpenAI Codex CLI/IDE/app raw skill | Supported | Use `.agents/skills/law-citation-skill` or the user skill path documented by your Codex surface; package with `--profile raw`. |
+| OpenAI Codex plugin | Supported | `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json`, and `skills/law-citation-skill/` are included; package with `--profile plugin`. |
 | Claude Code | Supported | Use the folder directly or package with `--profile raw`; scripts run with the local Python standard library. |
 | claude.ai custom skill upload | Supported for code-execution accounts | Upload the generated raw zip; network lookups still require the product/network settings to allow them. |
 | Claude API Skills | Supported for offline checks in code execution | Uses only Python standard-library modules. Do not rely on `--network` where the Claude API container has no internet access. |
@@ -153,7 +153,7 @@ labels. Treat supra proposals as editorial candidates, not final authority.
 Audit citations and produce an output `.docx` copy plus JSON report:
 
 ```bash
-citation-checker \
+law-citation-skill \
   --input path/to/article.docx \
   --output path/to/article_corrected.docx \
   --network \
@@ -198,13 +198,13 @@ The pipeline prints JSON with:
 ```bash
 python3 -m unittest discover -s tests -v
 python3 scripts/package_agent_skill.py --check
-python3 scripts/package_agent_skill.py --output /tmp/citation-checker-agent-skill.zip --layout folder --profile raw
-python3 scripts/package_agent_skill.py --output /tmp/citation-checker-codex-plugin.zip --layout folder --profile plugin
+python3 scripts/package_agent_skill.py --output /tmp/law-citation-skill-agent-skill.zip --layout folder --profile raw
+python3 scripts/package_agent_skill.py --output /tmp/law-citation-skill-codex-plugin.zip --layout folder --profile plugin
 ```
 
 ## Release Notes
 
-Version 2.15 focuses on Claude/OpenAI compatibility and public-release safety:
+Version 1.0 focuses on Claude/OpenAI compatibility and public-release safety:
 
 - Python 3.9 compatibility.
 - Standard-library-only runtime; removed the prior `lxml` dependency for managed code-execution compatibility.
@@ -213,7 +213,7 @@ Version 2.15 focuses on Claude/OpenAI compatibility and public-release safety:
 - Typeface findings use actual Word run formatting to suppress already-correct italics or small caps.
 - Portable `SKILL.md` metadata for Claude and OpenAI/Codex agent skill loaders.
 - `agents/openai.yaml` metadata for OpenAI skill lists and chips.
-- Codex plugin manifest and wrapper skill under `.codex-plugin/` and `skills/citation-checker/`.
+- Codex plugin manifest and wrapper skill under `.codex-plugin/` and `skills/law-citation-skill/`.
 - Repo-scoped Codex marketplace at `.agents/plugins/marketplace.json` for direct marketplace installation.
 - `scripts/package_agent_skill.py` compatibility validation plus separate raw skill and Codex plugin packaging profiles.
 - Raw Claude/OpenAI skill zips exclude plugin scaffolding, CI, tests, and repository release files.
@@ -239,7 +239,7 @@ Version 2.15 focuses on Claude/OpenAI compatibility and public-release safety:
 - Existing supra self-reference, forward-reference, and wrong-note validation.
 - Existing supra validation treats same-label multiple-source matches as ambiguity instead of forcing the first note.
 - `--apply-supra` requires explicit `--confirm-bio-notes`.
-- Installable `citation_checker_skill` package and `citation-checker` CLI.
+- Installable `citation_checker_skill` package and `law-citation-skill` CLI.
 - Safer supra proposal/application split; typeface on converted supra forms remains a manual review item to avoid ambiguous formatting targets.
 - Journal supra dedupe normalizes common defects such as `vol.` before matching.
 - Bio-note offset detection for supra note numbers.

@@ -8,7 +8,7 @@ import re, time, urllib.request, urllib.parse, json
 from dataclasses import dataclass, field
 from .classifier import SourceType
 
-USER_AGENT = "citation-checker/2.15.0"
+USER_AGENT = "law-citation-skill/1.0"
 
 _LAST_CROSSREF = 0.0
 _LAST_OPENLIBRARY = 0.0

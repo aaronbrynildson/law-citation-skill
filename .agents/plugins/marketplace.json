@@ -1,11 +1,11 @@
 {
-  "name": "citation-checker-marketplace",
+  "name": "law-citation-skill-marketplace",
   "interface": {
-    "displayName": "Citation Checker"
+    "displayName": "Law Citation Checker"
   },
   "plugins": [
     {
-      "name": "citation-checker",
+      "name": "law-citation-skill",
       "source": {
         "source": "local",
         "path": "./"

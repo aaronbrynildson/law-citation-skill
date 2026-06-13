@@ -1409,17 +1409,17 @@ class PipelineTests(unittest.TestCase):
         report = check_skill(ROOT)
 
         self.assertTrue(report["ok"], report)
-        self.assertEqual(report["metadata"]["name"], "citation-checker")
+        self.assertEqual(report["metadata"]["name"], "law-citation-skill")
         self.assertLessEqual(report["metadata"]["description_length"], 1024)
         self.assertIn("claude", report["targets"])
         self.assertIn("openai", report["targets"])
         self.assertTrue((ROOT / ".codex-plugin" / "plugin.json").is_file())
         self.assertTrue((ROOT / ".agents" / "plugins" / "marketplace.json").is_file())
-        self.assertTrue((ROOT / "skills" / "citation-checker" / "SKILL.md").is_file())
+        self.assertTrue((ROOT / "skills" / "law-citation-skill" / "SKILL.md").is_file())
 
     def test_repo_marketplace_points_to_plugin_root(self):
         marketplace = json.loads((ROOT / ".agents" / "plugins" / "marketplace.json").read_text(encoding="utf-8"))
-        entry = next(item for item in marketplace["plugins"] if item["name"] == "citation-checker")
+        entry = next(item for item in marketplace["plugins"] if item["name"] == "law-citation-skill")
 
         self.assertEqual(entry["source"], {"source": "local", "path": "./"})
         self.assertTrue((ROOT / ".codex-plugin" / "plugin.json").is_file())
@@ -1434,29 +1434,29 @@ class PipelineTests(unittest.TestCase):
     def test_agent_skill_zip_supports_folder_and_root_layouts(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
-            folder_zip = tmp_path / "citation-checker-folder.zip"
-            root_zip = tmp_path / "citation-checker-root.zip"
+            folder_zip = tmp_path / "law-citation-skill-folder.zip"
+            root_zip = tmp_path / "law-citation-skill-root.zip"
 
             folder_result = build_skill_zip(ROOT, folder_zip, layout="folder")
             root_result = build_skill_zip(ROOT, root_zip, layout="root")
 
-            self.assertEqual(folder_result["top_level"], "citation-checker")
+            self.assertEqual(folder_result["top_level"], "law-citation-skill")
             self.assertEqual(root_result["top_level"], None)
             self.assertEqual(folder_result["profile"], "raw")
             self.assertEqual(root_result["profile"], "raw")
             with ZipFile(folder_zip) as z:
                 names = z.namelist()
-                self.assertIn("citation-checker/SKILL.md", names)
-                self.assertIn("citation-checker/agents/openai.yaml", names)
-                self.assertIn("citation-checker/LICENSE", names)
-                self.assertIn("citation-checker/requirements.txt", names)
-                self.assertIn("citation-checker/scripts/run_pipeline.py", names)
-                self.assertIn("citation-checker/references/bluebook_rules.md", names)
-                self.assertNotIn("citation-checker/.agents/plugins/marketplace.json", names)
-                self.assertNotIn("citation-checker/.codex-plugin/plugin.json", names)
-                self.assertNotIn("citation-checker/README.md", names)
-                self.assertFalse(any(name.startswith("citation-checker/.github/") for name in names))
-                self.assertFalse(any(name.startswith("citation-checker/tests/") for name in names))
+                self.assertIn("law-citation-skill/SKILL.md", names)
+                self.assertIn("law-citation-skill/agents/openai.yaml", names)
+                self.assertIn("law-citation-skill/LICENSE", names)
+                self.assertIn("law-citation-skill/requirements.txt", names)
+                self.assertIn("law-citation-skill/scripts/run_pipeline.py", names)
+                self.assertIn("law-citation-skill/references/bluebook_rules.md", names)
+                self.assertNotIn("law-citation-skill/.agents/plugins/marketplace.json", names)
+                self.assertNotIn("law-citation-skill/.codex-plugin/plugin.json", names)
+                self.assertNotIn("law-citation-skill/README.md", names)
+                self.assertFalse(any(name.startswith("law-citation-skill/.github/") for name in names))
+                self.assertFalse(any(name.startswith("law-citation-skill/tests/") for name in names))
                 self.assertFalse(any("/dist/" in name or "/build/" in name for name in names))
             with ZipFile(root_zip) as z:
                 names = z.namelist()
@@ -1471,21 +1471,21 @@ class PipelineTests(unittest.TestCase):
     def test_plugin_profile_zip_includes_codex_distribution_files(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
-            plugin_zip = tmp_path / "citation-checker-plugin.zip"
+            plugin_zip = tmp_path / "law-citation-skill-plugin.zip"
 
             result = build_skill_zip(ROOT, plugin_zip, layout="folder", profile="plugin")
 
-            self.assertEqual(result["top_level"], "citation-checker")
+            self.assertEqual(result["top_level"], "law-citation-skill")
             self.assertEqual(result["profile"], "plugin")
             with ZipFile(plugin_zip) as z:
                 names = z.namelist()
-                self.assertIn("citation-checker/.agents/plugins/marketplace.json", names)
-                self.assertIn("citation-checker/.codex-plugin/plugin.json", names)
-                self.assertIn("citation-checker/skills/citation-checker/SKILL.md", names)
-                self.assertIn("citation-checker/README.md", names)
-                self.assertIn("citation-checker/PRIVACY.md", names)
-                self.assertIn("citation-checker/SKILL.md", names)
-                self.assertFalse(any(name.startswith("citation-checker/tests/") for name in names))
+                self.assertIn("law-citation-skill/.agents/plugins/marketplace.json", names)
+                self.assertIn("law-citation-skill/.codex-plugin/plugin.json", names)
+                self.assertIn("law-citation-skill/skills/law-citation-skill/SKILL.md", names)
+                self.assertIn("law-citation-skill/README.md", names)
+                self.assertIn("law-citation-skill/PRIVACY.md", names)
+                self.assertIn("law-citation-skill/SKILL.md", names)
+                self.assertFalse(any(name.startswith("law-citation-skill/tests/") for name in names))
 
 
 if __name__ == "__main__":

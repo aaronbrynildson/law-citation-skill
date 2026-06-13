@@ -3,8 +3,8 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "citation-checker-skill"
-version = "2.15.0"
+name = "law-citation-skill"
+version = "1.0"
 description = "Portable Claude/OpenAI agent skill for auditing legal citation footnotes in Word documents."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -25,12 +25,12 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/abrynild90/citation-checker-skill"
-Repository = "https://github.com/abrynild90/citation-checker-skill"
-Issues = "https://github.com/abrynild90/citation-checker-skill/issues"
+Homepage = "https://github.com/aaronbrynildson/law-citation-skill"
+Repository = "https://github.com/aaronbrynildson/law-citation-skill"
+Issues = "https://github.com/aaronbrynildson/law-citation-skill/issues"
 
 [project.scripts]
-citation-checker = "citation_checker_skill.run_pipeline:main"
+law-citation-skill = "citation_checker_skill.run_pipeline:main"
 
 [tool.setuptools]
 packages = ["citation_checker_skill", "citation_checker_skill.core"]

@@ -1,2 +1,2 @@
-"""Installable package wrapper for the citation-checker skill CLI."""
-__version__ = "2.15.0"
+"""Installable package wrapper for the law-citation-skill CLI."""
+__version__ = "1.0"

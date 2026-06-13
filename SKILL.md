@@ -1,5 +1,5 @@
 ---
-name: citation-checker
+name: law-citation-skill
 description: >-
   Legal citation checker for Word footnotes using Indigo Book-compatible and
   Bluebook-style rules. Use this skill whenever an author or editor uploads a
@@ -41,11 +41,11 @@ Law review citations use footnote format (Rule 1). Never reformat a footnote cit
 
 ## Runtime Compatibility
 
-Use this as a portable agent skill in Claude and OpenAI/Codex products. Treat `SKILL.md` as the canonical instruction file; `agents/openai.yaml` is OpenAI-specific UI metadata and may be ignored by Claude. Codex plugin distribution uses `.codex-plugin/plugin.json` plus the wrapper skill under `skills/citation-checker/`. Use bundled Python scripts through the local filesystem and do not rely on product-specific connectors, browser tools, or private APIs. The runtime uses only Python standard-library modules. Before distributing a zip, run:
+Use this as a portable agent skill in Claude and OpenAI/Codex products. Treat `SKILL.md` as the canonical instruction file; `agents/openai.yaml` is OpenAI-specific UI metadata and may be ignored by Claude. Codex plugin distribution uses `.codex-plugin/plugin.json` plus the wrapper skill under `skills/law-citation-skill/`. Use bundled Python scripts through the local filesystem and do not rely on product-specific connectors, browser tools, or private APIs. The runtime uses only Python standard-library modules. Before distributing a zip, run:
 
 ```bash
 python3 <skill_dir>/scripts/package_agent_skill.py --check
-python3 <skill_dir>/scripts/package_agent_skill.py --output citation-checker-agent-skill.zip --layout folder --profile raw
+python3 <skill_dir>/scripts/package_agent_skill.py --output law-citation-skill-agent-skill.zip --layout folder --profile raw
 ```
 
 If a product expects `SKILL.md` at the zip root, rerun with `--layout root`.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and package the citation-checker agent skill."""
+"""Validate and package an agent skill for Claude/OpenAI compatibility."""
 from __future__ import annotations
 
 import argparse
@@ -296,22 +296,22 @@ def _validate_marketplace(root: Path, skill_name: str, errors: list[str], warnin
         return
     entry = next((item for item in plugins if isinstance(item, dict) and item.get("name") == skill_name), None)
     if entry is None:
-        errors.append(".agents/plugins/marketplace.json must include a citation-checker plugin entry")
+        errors.append(f".agents/plugins/marketplace.json must include a {skill_name} plugin entry")
         return
     source = entry.get("source")
     if not isinstance(source, dict) or source.get("source") != "local":
-        errors.append(".agents/plugins/marketplace.json citation-checker source must be local")
+        errors.append(f".agents/plugins/marketplace.json {skill_name} source must be local")
         return
     path_value = source.get("path")
     if path_value != "./":
-        errors.append(".agents/plugins/marketplace.json citation-checker source.path must be ./ for this repo-root plugin")
+        errors.append(f".agents/plugins/marketplace.json {skill_name} source.path must be ./ for this repo-root plugin")
         return
     if not (root / ".codex-plugin" / "plugin.json").is_file():
         errors.append(".agents/plugins/marketplace.json source.path does not resolve to a plugin root")
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Validate and package the citation-checker agent skill")
+    parser = argparse.ArgumentParser(description="Validate and package an agent skill")
     parser.add_argument("--skill-dir", default=str(default_skill_dir()), help="Path to the skill folder")
     parser.add_argument("--check", action="store_true", help="Run compatibility checks")
     parser.add_argument("--output", help="Write a skill zip to this path")

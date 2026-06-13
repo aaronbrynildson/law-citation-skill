@@ -1,5 +1,5 @@
 ---
-name: citation-checker
+name: law-citation-skill
 description: >-
   Legal citation checker for Word footnotes using Indigo Book-compatible and
   Bluebook-style rules. Use this skill whenever an author or editor uploads a
@@ -8,7 +8,7 @@ description: >-
   or footnote formatting in legal scholarship.
 ---
 
-# Citation Checker Plugin Wrapper
+# Law Citation Checker Plugin Wrapper
 
 This Codex plugin wrapper points to the canonical skill instructions at
 `../../SKILL.md`. Read that file completely before auditing a document, then use

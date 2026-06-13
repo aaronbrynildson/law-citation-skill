@@ -10,8 +10,8 @@ include .agents/plugins/marketplace.json
 include .codex-plugin/plugin.json
 include agents/openai.yaml
 include references/*.md
-include skills/citation-checker/SKILL.md
-include skills/citation-checker/agents/openai.yaml
+include skills/law-citation-skill/SKILL.md
+include skills/law-citation-skill/agents/openai.yaml
 include tests/*.py
 include tests/fixtures/README.md
 include tests/fixtures/*.docx

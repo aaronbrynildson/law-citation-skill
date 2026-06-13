@@ -12,10 +12,10 @@ W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 
 
 def main() -> int:
-    cli = shutil.which("citation-checker")
+    cli = shutil.which("law-citation-skill")
     if cli is None:
-        candidate = Path(sys.executable).with_name("citation-checker")
-        cli = str(candidate) if candidate.exists() else "citation-checker"
+        candidate = Path(sys.executable).with_name("law-citation-skill")
+        cli = str(candidate) if candidate.exists() else "law-citation-skill"
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)

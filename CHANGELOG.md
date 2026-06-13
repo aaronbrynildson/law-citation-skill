@@ -1,28 +1,14 @@
 # Changelog
 
-## 2.15.0
+## 1.0
 
-- Split skill packaging into raw Claude/OpenAI upload artifacts and Codex
-  plugin artifacts.
-- Added public plugin metadata URLs plus a dedicated `PRIVACY.md` notice.
-- Added a rule index to `references/bluebook_rules.md`.
-- Updated GitHub Actions workflow steps to current major action releases.
-- Added explicit XML DTD/entity rejection before XML parsing.
-- Avoid creating output `.docx` files when package-wide XML validation fails.
-- Suppressed typeface false positives when the target text is already formatted
-  correctly in Word runs.
-- Tightened the compatibility checker skill-name validation.
-
-## 2.14.0
-
-- Added a repo-scoped Codex marketplace entry.
-- Added a committed Word-style `.docx` fixture with relationships, styles,
-  hyperlinks, footnotes, and tracked changes.
-- Added public `SECURITY.md` and `CONTRIBUTING.md`.
-
-## 2.13.0
-
-- Added Codex plugin manifest and wrapper skill.
-- Removed the runtime `lxml` dependency; the checker now uses only the Python
-  standard library.
-- Added Claude/OpenAI compatibility documentation and zip packaging validation.
+- Introduced portable Claude/OpenAI/Codex compatibility as a single packaged skill.
+- Added plugin metadata and Codex plugin wrapper support.
+- Split packaging into raw and plugin distribution profiles with deterministic zip structure.
+- Added compatibility checks for SKILL metadata, `agents/openai.yaml`, and Codex wrapper/marketplace wiring.
+- Standard-library-only runtime with explicit XML validation safeguards.
+- Audit-first workflow with explicit manual-review gates for semantic corrections.
+- Added user-facing bio-note handling for supra validation.
+- Improved source verification handling and conservative verification reporting.
+- Added runtime CLI guardrails for malformed inputs and unsafe package conditions.
+- Added public release documentation for installation, compatibility, and test commands.

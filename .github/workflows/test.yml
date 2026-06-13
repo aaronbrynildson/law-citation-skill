@@ -29,11 +29,11 @@ jobs:
       - name: Check agent skill compatibility
         run: python scripts/package_agent_skill.py --check
       - name: Package agent skill zip
-        run: python scripts/package_agent_skill.py --output /tmp/citation-checker-agent-skill.zip --layout folder --profile raw
+        run: python scripts/package_agent_skill.py --output /tmp/law-citation-skill-agent-skill.zip --layout folder --profile raw
       - name: Package root-layout agent skill zip
-        run: python scripts/package_agent_skill.py --output /tmp/citation-checker-agent-skill-root.zip --layout root --profile raw
+        run: python scripts/package_agent_skill.py --output /tmp/law-citation-skill-agent-skill-root.zip --layout root --profile raw
       - name: Package Codex plugin zip
-        run: python scripts/package_agent_skill.py --output /tmp/citation-checker-codex-plugin.zip --layout folder --profile plugin
+        run: python scripts/package_agent_skill.py --output /tmp/law-citation-skill-codex-plugin.zip --layout folder --profile plugin
       - name: Installed CLI smoke test from wheel
         run: python tests/installed_cli_smoke.py
       - name: Compile Python files
@@ -47,4 +47,4 @@ jobs:
       - name: Installed CLI smoke test from sdist
         run: python tests/installed_cli_smoke.py
       - name: Check installed CLI
-        run: citation-checker --help
+        run: law-citation-skill --help
