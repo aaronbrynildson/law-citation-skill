@@ -1,4 +1,4 @@
-# Citation Checker Skill
+# Law Citation Checker Skill
 
 Portable Claude/OpenAI agent skill for auditing legal citation footnotes in Word `.docx` files. It extracts footnotes, classifies source types, checks Indigo Book-compatible and Bluebook-style citation patterns, verifies selected sources through public APIs when requested, and can write tracked-change `.docx` output for approved corrections. The runtime uses only the Python standard library.
 
